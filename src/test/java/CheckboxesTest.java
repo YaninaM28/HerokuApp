@@ -3,10 +3,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import java.time.Duration;
 import java.util.List;
@@ -25,6 +25,7 @@ public class CheckboxesTest {
 
     @Test
     public void checkCheckboxes() {
+        SoftAssert softAssert = new SoftAssert();
         driver.get("https://the-internet.herokuapp.com/checkboxes");
         // сделать лист с чекбаксами
         List<WebElement> checkboxes = driver.findElements(By.cssSelector("input[type='checkbox']"));
@@ -33,17 +34,18 @@ public class CheckboxesTest {
         // второй чекбокс
         WebElement secondCheckbox = checkboxes.get(1);
         // проверить что первый чекбокс анчекд
-        Assert.assertFalse(firstCheckbox.isSelected());
+        softAssert.assertFalse(firstCheckbox.isSelected());
         // нажать чтобы сделать первый чекбокс чекнутым
         firstCheckbox.click();
         // проверить еще раз, что первый чекбокс чекнутый
-        Assert.assertTrue(firstCheckbox.isSelected());
+        softAssert.assertTrue(firstCheckbox.isSelected());
         // проверить что второй чекбокс чекнутый
-        Assert.assertTrue(secondCheckbox.isSelected());
+        softAssert.assertTrue(secondCheckbox.isSelected());
         // нажать чтобы второй стал анчек
         secondCheckbox.click();
         // проверка что второй чекбокс уже анчекед
-        Assert.assertFalse(secondCheckbox.isSelected());
+        softAssert.assertFalse(secondCheckbox.isSelected());
+        softAssert.assertAll();
     }
 
     @AfterMethod

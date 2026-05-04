@@ -26,13 +26,15 @@ public class TyposTest {
     public void checkTypos() {
         driver.get("https://the-internet.herokuapp.com/typos");
         SoftAssert softAssert = new SoftAssert();
-        String expectedParagraph = "Sometimes you'll see a typo, other times you won't.";
         for (int i = 0; i < 10; i++) {
-            WebElement paragraph = driver.findElement(By.tagName("p"));
-            String actualParagraph = paragraph.getText();
+            WebElement element = driver.findElement(By.xpath("//*[@id='content']/div/p[2]"));
+            String secondLineText = element.getText();
             // проверить текст
-            softAssert.assertEquals(actualParagraph, expectedParagraph, "Орфографическая ошибка на итерации: " + i);
-            // обновить страницу
+            softAssert.assertEquals(
+                    secondLineText,
+                    "Sometimes you'll see a typo, other times you won't.",
+                    "Итерация " + i + " - текст не совпал"
+            );
             driver.navigate().refresh();
         }
         softAssert.assertAll();
@@ -40,6 +42,8 @@ public class TyposTest {
 
     @AfterMethod
     public void tearDown() {
-        driver.quit();
+        if (driver != null) {
+            driver.quit();
+        }
     }
 }
