@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 import java.time.Duration;
 import java.util.List;
 
-public class AddAndRemoveElements {
+public class AddAndRemoveElementsTest {
 
     WebDriver driver;
 
