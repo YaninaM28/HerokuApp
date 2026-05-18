@@ -30,6 +30,7 @@ public class FramesTest {
         driver.switchTo().frame("mce_0_ifr");
         WebElement paragraph = driver.findElement(By.id("tinymce"));
         softAssert.assertEquals(paragraph.getText(), "Your content goes here.", "Text is different!!!");
+        softAssert.assertAll();
     }
 
     @AfterMethod

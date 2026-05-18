@@ -7,12 +7,13 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
+
+import static org.testng.Assert.assertEquals;
 
 public class ContextMenuTest {
 
@@ -35,7 +36,7 @@ public class ContextMenuTest {
         actions.contextClick(element).perform();
         wait.until(ExpectedConditions.alertIsPresent());
         Alert alert = driver.switchTo().alert();
-        Assert.assertEquals(alert.getText(), "You selected a context menu", "Ошибка!!!");
+        assertEquals(alert.getText(), "You selected a context menu", "Ошибка!!!");
         alert.accept();
     }
 
